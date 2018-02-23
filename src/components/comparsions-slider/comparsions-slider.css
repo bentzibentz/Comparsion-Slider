@@ -1,0 +1,127 @@
+.comparsions {
+    width: 100%;
+    position: relative;
+    height: auto;
+}
+
+.comparsions__info {
+    height: 100%;
+
+
+    & > * {
+        max-width: 650px;
+        width: 100%;
+    }
+}
+
+.comparsions__info-content {
+    padding: 2.5rem;
+    color: #fff;
+}
+
+.comparsions__slider {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.comparsions__slider-container {
+    margin: 0;
+}
+
+.comparsions__slider-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.comparsions__slider-image-label {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #ffffff;
+    padding: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.3s 0.7s, opacity 0.3s 0.7s;
+}
+.comparsions__slider-image-label.is-hidden {
+    visibility: hidden;
+}
+
+.is-visible .comparsions__slider-image-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.comparsions__slider-resize-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.comparsions__slider-resize-img img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: none;
+}
+
+.comparsions__slider-resize-img .comparsions__slider-image-label {
+    right: auto;
+    left: 0;
+}
+
+.is-visible .comparsions__slider-resize-img {
+    width: 50%;
+    animation: cd-bounce-in 0.7s;
+}
+
+@keyframes cd-bounce-in {
+    0% {
+        width: 0;
+    }
+    60% {
+        width: 55%;
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+.comparsions__slider-handle {
+    position: absolute;
+    height: 44px;
+    width: 44px;
+    left: 50%;
+    top: 50%;
+    margin-left: -22px;
+    margin-top: -22px;
+    border-radius: 50%;
+    background: #fff url("./img/cd-arrows.svg") no-repeat center center;
+    cursor: move;
+    box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+}
+
+.comparsions__slider-handle.draggable {
+    background-color: var(--sinclair-key);
+}
+
+.is-visible .comparsions__slider-handle {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition: transform 0.3s 0.7s, opacity 0s 0.7s;
+}
+

@@ -15,29 +15,31 @@ declare global {
 
 
 import {
-  MyComponent as MyComponent
-} from './components/my-component/my-component';
+  ComparsionsSlider as ComparsionsSlider
+} from './components/comparsions-slider/comparsions-slider';
 
 declare global {
-  interface HTMLMyComponentElement extends MyComponent, HTMLStencilElement {
+  interface HTMLComparsionsSliderElement extends ComparsionsSlider, HTMLStencilElement {
   }
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  var HTMLComparsionsSliderElement: {
+    prototype: HTMLComparsionsSliderElement;
+    new (): HTMLComparsionsSliderElement;
   };
   interface HTMLElementTagNameMap {
-    "my-component": HTMLMyComponentElement;
+    "comparsions-slider": HTMLComparsionsSliderElement;
   }
   interface ElementTagNameMap {
-    "my-component": HTMLMyComponentElement;
+    "comparsions-slider": HTMLComparsionsSliderElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "my-component": JSXElements.MyComponentAttributes;
+      "comparsions-slider": JSXElements.ComparsionsSliderAttributes;
     }
   }
   namespace JSXElements {
-    export interface MyComponentAttributes extends HTMLAttributes {
+    export interface ComparsionsSliderAttributes extends HTMLAttributes {
+      after?: string;
+      before?: string;
       first?: string;
       last?: string;
     }

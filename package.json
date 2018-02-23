@@ -1,14 +1,14 @@
 {
-  "name": "my-component",
+  "name": "comparsions-slider",
   "version": "0.0.1",
   "description": "Stencil Component Starter",
-  "main": "dist/mycomponent.js",
+  "main": "dist/comparsions-slider.js",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/"
   ],
-  "browser": "dist/mycomponent.js",
+  "browser": "dist/comparsions-slider.js",
   "scripts": {
     "build": "stencil build",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
@@ -18,7 +18,9 @@
     "test.watch": "jest --watch --no-cache"
   },
   "dependencies": {
-    "@stencil/core": "^0.6.1"
+    "@stencil/core": "^0.6.1",
+    "@types/hammerjs": "^2.0.35",
+    "hammerjs": "^2.0.8"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",

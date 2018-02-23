@@ -1,5 +1,5 @@
 exports.config = {
-  namespace: 'mycomponent',
+  namespace: 'comparsions-slider',
   generateDistribution: true,
   serviceWorker: false
 };

@@ -1,16 +1,16 @@
 import { flush, render } from '@stencil/core/testing';
-import { MyComponent } from './my-component';
+import { ComparsionsSlider } from './comparsions-slider';
 
-describe('my-component', () => {
+describe('comparsions-slider', () => {
   it('should build', () => {
-    expect(new MyComponent()).toBeTruthy();
+    expect(new ComparsionsSlider()).toBeTruthy();
   });
 
   describe('rendering', () => {
     let element;
     beforeEach(async () => {
       element = await render({
-        components: [MyComponent],
+        components: [ComparsionsSlider],
         html: '<my-component></my-component>'
       });
     });
