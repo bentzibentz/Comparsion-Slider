@@ -17,12 +17,7 @@ export class ComparsionsSlider {
     componentDidLoad() {
 
         let dragging = false,
-            scrolling = false,
             resizing = false;
-
-        console.log(dragging);
-        console.log(scrolling);
-        console.log(resizing);
 
         const imageComparisonContainers = [].slice.call(this.comparsionsSliderContainer.querySelectorAll('.comparsions__slider-container'));
 
@@ -37,9 +32,9 @@ export class ComparsionsSlider {
             drags(
                 actual.querySelector('.comparsions__slider-handle'),
                 actual.querySelector('.comparsions__slider-resize-img'),
+                actual,
                 actual.querySelector('.comparsions__slider-image-label[data-type="original"]'),
                 actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'),
-                'test'
             )
         });
 
@@ -54,15 +49,28 @@ export class ComparsionsSlider {
             console.log('resizing');
         }, false);
 
-        function checkLabel(container) {
-           console.log(container);
+        function checkLabel(containers) {
+           containers.forEach(function (container) {
+               console.log('container');
+               console.log(container);
+               const actual = container;
+               updateLabel(
+                   actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'),
+                   actual.querySelector('.comparsions__slider-resize-img'),
+                   'left'
+               );
+               updateLabel(
+                   actual.querySelector('.comparsions__slider-image-label[data-type="original"]'),
+                   actual.querySelector('.comparsions__slider-resize-img'),
+                   'right'
+               );
+           });
+
+            resizing = false;
+
         }
 
         function drags(dragElement, resizeElement, container, labelContainer, labelResizeElement) {
-            console.log(dragElement);
-            console.log(resizeElement);
-            console.log(container);
-            console.log(labelContainer);
 
             const handle = document.getElementById('comparsions__slider-handle');
 
@@ -98,9 +106,16 @@ export class ComparsionsSlider {
                 });
 
             });
+
+            handleHammer.on('panend', function(){
+                dragElement.classList.remove('draggable');
+                resizeElement.classList.remove('resizable');
+            });
+
         }
 
         function animateDraggedHandle(e, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement) {
+
             let leftValue = e + xPosition - dragWidth;
             //constrain the draggable element to move inside his container
             if(leftValue < minLeft ) {
@@ -111,37 +126,54 @@ export class ComparsionsSlider {
 
             const widthValue = (leftValue + dragWidth / 2 - containerOffset ) * 100 / containerWidth + '%';
 
-            console.log(widthValue);
-            console.log(resizeElement);
-            console.log(labelContainer);
-            console.log(labelResizeElement);
-
             const draggables = document.getElementsByClassName('draggable') as HTMLCollectionOf<HTMLElement>;
             const resizables = document.getElementsByClassName('resizable') as HTMLCollectionOf<HTMLElement>;
 
             draggables[0].style.left = widthValue;
 
+            draggables[0].addEventListener("mouseup vmouseup", function () {
+                this.classList.remove('draggable');
+                resizeElement.classList.remove('resizable');
+
+                console.log('mouseup');
+            });
+
             resizables[0].style.width = widthValue;
 
-        }
+            updateLabel(labelResizeElement, resizeElement, 'left');
+            updateLabel(labelContainer, resizeElement, 'right');
 
-        /*
-        function checkPosition(container) {
-
-        }
-
-        function checkLabel() {
+            dragging =  false;
 
         }
 
-        function drags() {
+        function updateLabel(label, resizeElement, position) {
+            console.log('updateLabel');
+
+            console.log(label);
+            console.log(resizeElement);
+            console.log(position);
+
+            if(position === 'left') {
+                ( getOffsetLeft(label) + label.clientWidth < getOffsetLeft(resizeElement) + resizeElement.clientWidth ) ? label.classList.remove('is-hidden') : label.classList.add('is-hidden') ;
+            } else {
+                ( getOffsetLeft(label) > getOffsetLeft(resizeElement) + resizeElement.clientWidth ) ? label.classList.remove('is-hidden') : label.classList.add('is-hidden') ;
+            }
 
         }
 
-        function updateLabel() {
-
+        function getOffsetLeft( elem )
+        {
+            let offsetLeft = 0;
+            do {
+                if ( !isNaN( elem.offsetLeft ) )
+                {
+                    offsetLeft += elem.offsetLeft;
+                }
+            } while( elem = elem.offsetParent );
+            return offsetLeft;
         }
-        */
+
     }
 
   render() {
@@ -149,7 +181,7 @@ export class ComparsionsSlider {
       <div class="comparsions">
         <div class="comparsions__wrapper">
             <div class="comparsions__slider">
-                <figure class="comparsions__slider-container">
+                <figure class="comparsions__slider-container is-visible">
                     <img src={ this.after } alt="After Image" />
                     <span class="comparsions__slider-image-label" data-type="original">After</span>
 

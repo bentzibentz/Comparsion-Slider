@@ -2323,10 +2323,7 @@ ComparsionsSlider.loadBundle('comparsions-slider', ['exports'], function (export
         function ComparsionsSlider() {
         }
         ComparsionsSlider.prototype.componentDidLoad = function () {
-            var dragging = false, scrolling = false, resizing = false;
-            console.log(dragging);
-            console.log(scrolling);
-            console.log(resizing);
+            var dragging = false, resizing = false;
             var imageComparisonContainers = [].slice.call(this.comparsionsSliderContainer.querySelectorAll('.comparsions__slider-container'));
             console.log(imageComparisonContainers);
             window.addEventListener('scroll', function () {
@@ -2334,7 +2331,7 @@ ComparsionsSlider.loadBundle('comparsions-slider', ['exports'], function (export
             });
             imageComparisonContainers.forEach(function (imageComparisonContainer) {
                 var actual = imageComparisonContainer;
-                drags(actual.querySelector('.comparsions__slider-handle'), actual.querySelector('.comparsions__slider-resize-img'), actual.querySelector('.comparsions__slider-image-label[data-type="original"]'), actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'), 'test');
+                drags(actual.querySelector('.comparsions__slider-handle'), actual.querySelector('.comparsions__slider-resize-img'), actual, actual.querySelector('.comparsions__slider-image-label[data-type="original"]'), actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'));
             });
             window.addEventListener("resize", function () {
                 if (!resizing) {
@@ -2345,14 +2342,17 @@ ComparsionsSlider.loadBundle('comparsions-slider', ['exports'], function (export
                 }
                 console.log('resizing');
             }, false);
-            function checkLabel(container) {
-                console.log(container);
+            function checkLabel(containers) {
+                containers.forEach(function (container) {
+                    console.log('container');
+                    console.log(container);
+                    var actual = container;
+                    updateLabel(actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'), actual.querySelector('.comparsions__slider-resize-img'), 'left');
+                    updateLabel(actual.querySelector('.comparsions__slider-image-label[data-type="original"]'), actual.querySelector('.comparsions__slider-resize-img'), 'right');
+                });
+                resizing = false;
             }
             function drags(dragElement, resizeElement, container, labelContainer, labelResizeElement) {
-                console.log(dragElement);
-                console.log(resizeElement);
-                console.log(container);
-                console.log(labelContainer);
                 var handle = document.getElementById('comparsions__slider-handle');
                 var handleHammer = new Hammer.Manager(handle);
                 var pan = new Hammer.Pan();
@@ -2373,6 +2373,10 @@ ComparsionsSlider.loadBundle('comparsions-slider', ['exports'], function (export
                         }
                     });
                 });
+                handleHammer.on('panend', function () {
+                    dragElement.classList.remove('draggable');
+                    resizeElement.classList.remove('resizable');
+                });
             }
             function animateDraggedHandle(e, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement) {
                 var leftValue = e + xPosition - dragWidth;
@@ -2384,35 +2388,43 @@ ComparsionsSlider.loadBundle('comparsions-slider', ['exports'], function (export
                     leftValue = maxLeft;
                 }
                 var widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + '%';
-                console.log(widthValue);
-                console.log(resizeElement);
-                console.log(labelContainer);
-                console.log(labelResizeElement);
                 var draggables = document.getElementsByClassName('draggable');
                 var resizables = document.getElementsByClassName('resizable');
                 draggables[0].style.left = widthValue;
+                draggables[0].addEventListener("mouseup vmouseup", function () {
+                    this.classList.remove('draggable');
+                    resizeElement.classList.remove('resizable');
+                    console.log('mouseup');
+                });
                 resizables[0].style.width = widthValue;
+                updateLabel(labelResizeElement, resizeElement, 'left');
+                updateLabel(labelContainer, resizeElement, 'right');
+                dragging = false;
             }
-            /*
-            function checkPosition(container) {
-    
+            function updateLabel(label, resizeElement, position) {
+                console.log('updateLabel');
+                console.log(label);
+                console.log(resizeElement);
+                console.log(position);
+                if (position === 'left') {
+                    (getOffsetLeft(label) + label.clientWidth < getOffsetLeft(resizeElement) + resizeElement.clientWidth) ? label.classList.remove('is-hidden') : label.classList.add('is-hidden');
+                }
+                else {
+                    (getOffsetLeft(label) > getOffsetLeft(resizeElement) + resizeElement.clientWidth) ? label.classList.remove('is-hidden') : label.classList.add('is-hidden');
+                }
             }
-    
-            function checkLabel() {
-    
+            function getOffsetLeft(elem) {
+                var offsetLeft = 0;
+                do {
+                    if (!isNaN(elem.offsetLeft)) {
+                        offsetLeft += elem.offsetLeft;
+                    }
+                } while (elem = elem.offsetParent);
+                return offsetLeft;
             }
-    
-            function drags() {
-    
-            }
-    
-            function updateLabel() {
-    
-            }
-            */
         };
         ComparsionsSlider.prototype.render = function () {
-            return (h("div", { class: "comparsions" }, h("div", { class: "comparsions__wrapper" }, h("div", { class: "comparsions__slider" }, h("figure", { class: "comparsions__slider-container" }, h("img", { src: this.after, alt: "After Image" }), h("span", { class: "comparsions__slider-image-label", "data-type": "original" }, "After"), h("div", { class: "comparsions__slider-resize-img" }, h("img", { src: this.before, alt: "Before Image" }), h("span", { class: "comparsions__slider-image-label", "data-type": "modified" }, "Before")), h("span", { class: "comparsions__slider-handle", id: "comparsions__slider-handle" }, " ")))), "Hello, World! I'm ", this.first, " ", this.last));
+            return (h("div", { class: "comparsions" }, h("div", { class: "comparsions__wrapper" }, h("div", { class: "comparsions__slider" }, h("figure", { class: "comparsions__slider-container is-visible" }, h("img", { src: this.after, alt: "After Image" }), h("span", { class: "comparsions__slider-image-label", "data-type": "original" }, "After"), h("div", { class: "comparsions__slider-resize-img" }, h("img", { src: this.before, alt: "Before Image" }), h("span", { class: "comparsions__slider-image-label", "data-type": "modified" }, "Before")), h("span", { class: "comparsions__slider-handle", id: "comparsions__slider-handle" }, " ")))), "Hello, World! I'm ", this.first, " ", this.last));
         };
         Object.defineProperty(ComparsionsSlider, "is", {
             get: function () { return "comparsions-slider"; },
