@@ -40,8 +40,6 @@ declare global {
     export interface ComparsionsSliderAttributes extends HTMLAttributes {
       after?: string;
       before?: string;
-      first?: string;
-      last?: string;
     }
   }
 }

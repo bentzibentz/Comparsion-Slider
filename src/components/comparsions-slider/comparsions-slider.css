@@ -116,7 +116,7 @@
 }
 
 .comparsions__slider-handle.draggable {
-    background-color: var(--sinclair-key);
+    background-color: #00;
 }
 
 .is-visible .comparsions__slider-handle {

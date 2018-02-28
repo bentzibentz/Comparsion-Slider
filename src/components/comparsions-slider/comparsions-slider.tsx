@@ -7,8 +7,6 @@ import 'hammerjs/hammer';
 })
 export class ComparsionsSlider {
 
-    @Prop() first: string;
-    @Prop() last: string;
     @Prop() before: string;
     @Prop() after: string;
 
@@ -194,7 +192,6 @@ export class ComparsionsSlider {
                 </figure>
             </div>
         </div>
-        Hello, World! I'm {this.first} {this.last}
       </div>
     );
   }

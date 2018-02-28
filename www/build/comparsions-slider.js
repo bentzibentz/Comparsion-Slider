@@ -63,4 +63,4 @@ function supportsCssVariables(win) {
 
 init(win, doc, doc.scripts, appNamespace, urlNamespace, publicPath, discoverPublicPath, appCore, appCoreSsr, appCorePolyfilled, hydratedCssClass, components);
 
-})(window, document, "ComparsionsSlider","comparsions-slider","/build/comparsions-slider/",true,"comparsions-slider.core.js","comparsions-slider.core.pf.js","hydrated",[["comparsions-slider","comparsions-slider",1,[["after",1,1,2],["before",1,1,2],["comparsionsSliderContainer",7],["first",1,1,2],["last",1,1,2]]]]);
+})(window, document, "ComparsionsSlider","comparsions-slider","/build/comparsions-slider/",true,"comparsions-slider.core.js","comparsions-slider.core.pf.js","hydrated",[["comparsions-slider","comparsions-slider",1,[["after",1,1,2],["before",1,1,2],["comparsionsSliderContainer",7]]]]);
