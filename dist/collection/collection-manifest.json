@@ -1,0 +1,35 @@
+{
+  "components": [
+    {
+      "tag": "comparsions-slider",
+      "dependencies": [],
+      "componentClass": "ComparsionsSlider",
+      "componentPath": "components/comparsions-slider/comparsions-slider.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/comparsions-slider/comparsions-slider.css"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "after",
+          "type": "String"
+        },
+        {
+          "name": "before",
+          "type": "String"
+        }
+      ],
+      "hostElement": {
+        "name": "comparsionsSliderContainer"
+      }
+    }
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "0.6.1",
+    "typescriptVersion": "2.7.2"
+  }
+}
