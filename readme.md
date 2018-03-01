@@ -18,7 +18,7 @@ soon…
 ### Install
 Include it in your project like this:
 ``` html
-  <script src="comparsion-slider.js"></script>
+  <script src="./example-folders/dist/comparsion-slider.js"></script>
 ```
 
 ## Usage
