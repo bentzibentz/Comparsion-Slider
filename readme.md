@@ -9,7 +9,27 @@ A simple, responsive and touch friendly Comparsion Slider Webcomponent build wit
 ## How to use it?
 
 ### Download
-
-
 + JavaScript:
-  - [comparsion-slider.js]()
+  - [comparsion-slider.js](https://github.com/bentzibentz/Comparsion-Slider/blob/master/dist/comparsions-slider.js)
+
+### Install
+Include it in your project like this:
+``` html
+  <script src="comparsion-slider.js"></script>
+```
+
+## Usage
+Add Webcomponent with your image urls to your html file:
+``` html
+  <comparsions-slider
+          before="https://raw.githubusercontent.com/bentzibentz/Comparsion-Slider/master/demo/before.png"
+          after="https://raw.githubusercontent.com/bentzibentz/Comparsion-Slider/master/demo/after.png">
+  </comparsions-slider>
+```
+
+## License
+[MIT License](https://github.com/bentzibentz/Comparsion-Slider/blob/master/LICENSE)
+
+---
+
+By [bentzibentz](https://github.com/bentzibentz)
