@@ -9,17 +9,17 @@ A simple, responsive and touch friendly Comparsion Slider Webcomponent build wit
 ## How to use it?
 
 ### Npm
-soon…
-
-### Download
-+ Files:
-  - [dist folder](https://github.com/bentzibentz/Pineapple-Comparsion-Slider/tree/master/dist)
-
-### Install
-Include it in your project like this:
+Include it in your project like this in the head of your index.html:
 ``` html
-  <script src="./example-folders/dist/comparsion-slider.js"></script>
+  <script src="https://unpkg.com/pineapple-comparsions-slider@0.0.2/dist/comparsions-slider.js"></script>
 ```
+
+### Node Modules
+
++ Run npm install pineapple-comparsions-slider --save
++ Put a script tag similar to this <script src='node_modules/pineapple-comparsions-slider/dist/comparsion-slider.js'></script> in the head of your index.html
++ Then you can use the element anywhere in your template, JSX, html etc
+
 
 ## Usage
 Add Webcomponent with your image urls to your html file:
