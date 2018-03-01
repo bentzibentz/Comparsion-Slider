@@ -6,12 +6,11 @@
 
 .comparsions__info {
     height: 100%;
+}
 
-
-    & > * {
-        max-width: 650px;
-        width: 100%;
-    }
+.comparsions__info > * {
+    max-width: 650px;
+    width: 100%;
 }
 
 .comparsions__info-content {
@@ -108,7 +107,7 @@
     margin-left: -22px;
     margin-top: -22px;
     border-radius: 50%;
-    background: #fff url("./img/cd-arrows.svg") no-repeat center center;
+    background: #f1c40f url("./img/cd-arrows.svg") no-repeat center center;
     cursor: move;
     box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     opacity: 1;
@@ -116,12 +115,17 @@
 }
 
 .comparsions__slider-handle.draggable {
-    background-color: #00;
+    background-color: #e67e22;
 }
 
 .is-visible .comparsions__slider-handle {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
     transition: transform 0.3s 0.7s, opacity 0s 0.7s;
+}
+
+.comparsions__slider-handle svg {
+    width: 44px;
+    height: 44px;
 }
 

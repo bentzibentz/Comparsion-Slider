@@ -15,6 +15,7 @@ export class ComparsionsSlider {
     componentDidLoad() {
 
         let dragging = false,
+            scrolling = false,
             resizing = false;
 
         const imageComparisonContainers = [].slice.call(this.comparsionsSliderContainer.querySelectorAll('.comparsions__slider-container'));
@@ -22,7 +23,12 @@ export class ComparsionsSlider {
         console.log(imageComparisonContainers);
 
         window.addEventListener('scroll', function() {
-            console.log('scrolling');
+            if( !scrolling) {
+                scrolling =  true;
+                ( !window.requestAnimationFrame )
+                    ? setTimeout(function(){checkPosition(imageComparisonContainers);}, 100)
+                    : requestAnimationFrame(function(){checkPosition(imageComparisonContainers);});
+            }
         });
 
         imageComparisonContainers.forEach(function (imageComparisonContainer) {
@@ -46,6 +52,18 @@ export class ComparsionsSlider {
 
             console.log('resizing');
         }, false);
+
+        function checkPosition(container) {
+
+            container.forEach(function (actualContainer) {
+                let actualContainerViewportOffset = actualContainer.getBoundingClientRect();
+                if(actualContainerViewportOffset.top <= 350) {
+                    actualContainer.classList.add('is-visible');
+                }
+            });
+
+            scrolling = false;
+        }
 
         function checkLabel(containers) {
            containers.forEach(function (container) {
@@ -188,7 +206,13 @@ export class ComparsionsSlider {
                           <span class="comparsions__slider-image-label" data-type="modified">Before</span>
                     </div>
 
-                    <span class="comparsions__slider-handle" id="comparsions__slider-handle"> </span>
+                    <span class="comparsions__slider-handle" id="comparsions__slider-handle">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32">
+                        <polygon fill="#FFFFFF" points="13,21 8,16 13,11 "/>
+                        <polygon fill="#FFFFFF" points="19,11 24,16 19,21 "/>
+                        </svg>
+                    </span>
                 </figure>
             </div>
         </div>

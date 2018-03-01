@@ -1,0 +1,83 @@
+/* DEMO STYLES ONLY */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 16px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "pnum";
+    font-variant-numeric: proportional-nums;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+pre {
+    border-radius: 5px;
+    background-color: #ebebeb;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    overflow: auto;
+}
+
+pre code {
+    padding: 0;
+    line-height: 1.5;
+    background: none;
+    border: none;
+    white-space: pre-wrap;
+}
+
+code .tag {
+    color: #37B;
+}
+code .title {
+    color: #39A;
+}
+code .attribute {
+    color: #D31;
+}
+code .string, code .tag .value {
+    color: #0A2;
+}
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: #f1c40f;
+    font-weight: bold;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+.body {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.slider {
+    max-width: 650px;
+    width: 100%;
+    margin: 1rem 0 3rem 0;
+}
+
+h1 span {
+    color: #f1c40f;
+    font-style: italic;
+}

@@ -2,11 +2,11 @@
   "namespace": "ComparsionsSlider",
   "fsNamespace": "comparsions-slider",
   "loader": "../comparsions-slider.js",
-  "core": "comparsions-slider.core.js",
-  "corePolyfilled": "comparsions-slider.core.pf.js",
+  "core": "comparsions-slider.m5lbqfwr.js",
+  "corePolyfilled": "comparsions-slider.1w0v7cfk.js",
   "components": {
     "comparsions-slider": {
-      "$": "comparsions-slider"
+      "$": "ak5iavz8"
     }
   }
 }
