@@ -8,9 +8,12 @@ A simple, responsive and touch friendly Comparsion Slider Webcomponent build wit
 
 ## How to use it?
 
+### Npm
+soon…
+
 ### Download
-+ JavaScript:
-  - [comparsion-slider.js](https://github.com/bentzibentz/Comparsion-Slider/blob/master/dist/comparsions-slider.js)
++ Files:
+  - [dist folder](https://github.com/bentzibentz/Pineapple-Comparsion-Slider/tree/master/dist)
 
 ### Install
 Include it in your project like this:
