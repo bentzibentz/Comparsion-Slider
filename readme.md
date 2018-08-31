@@ -25,6 +25,7 @@ Include it in your project like this in the head of your index.html:
 Add Webcomponent with your image urls to your html file:
 ``` html
   <comparsions-slider
+          id="123"
           before="https://raw.githubusercontent.com/bentzibentz/Comparsion-Slider/master/demo/before.png"
           after="https://raw.githubusercontent.com/bentzibentz/Comparsion-Slider/master/demo/after.png">
   </comparsions-slider>
