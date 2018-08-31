@@ -1,6 +1,6 @@
 {
   "name": "pineapple-comparsions-slider",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Pineapple Comparsion Slider",
   "main": "dist/comparsions-slider.js",
   "types": "dist/types/index.d.ts",

@@ -11,7 +11,7 @@ A simple, responsive and touch friendly Comparsion Slider Webcomponent build wit
 ### Npm
 Include it in your project like this in the head of your index.html:
 ``` html
-  <script src="https://unpkg.com/pineapple-comparsions-slider@0.1.2/dist/comparsions-slider.js"></script>
+  <script src="https://unpkg.com/pineapple-comparsions-slider@0.1.3/dist/comparsions-slider.js"></script>
 ```
 
 ### Node Modules

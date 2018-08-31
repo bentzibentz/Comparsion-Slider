@@ -21,8 +21,6 @@ export class ComparsionsSlider {
 
         const imageComparisonContainers = [].slice.call(this.comparsionsSliderContainer.querySelectorAll('.comparsions__slider-container'));
 
-        console.log(imageComparisonContainers);
-
         window.addEventListener('scroll', function() {
             if( !scrolling) {
                 scrolling =  true;
@@ -57,7 +55,6 @@ export class ComparsionsSlider {
                     : requestAnimationFrame(function(){checkLabel(imageComparisonContainers);});
             }
 
-            console.log('resizing');
         }, false);
 
         function checkPosition(container) {
@@ -74,8 +71,6 @@ export class ComparsionsSlider {
 
         function checkLabel(containers) {
            containers.forEach(function (container) {
-               console.log('container');
-               console.log(container);
                const actual = container;
                updateLabel(
                    actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'),
@@ -102,8 +97,6 @@ export class ComparsionsSlider {
             handleHammer.add(pan);
 
             handleHammer.on('panstart', function(el){
-
-                //console.log(el);
 
                 handle.classList.add('draggable');
                 handle.classList.add('draggable-' + index);

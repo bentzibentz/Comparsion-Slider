@@ -3,7 +3,6 @@ export class ComparsionsSlider {
     componentDidLoad() {
         let dragging = false, scrolling = false, resizing = false;
         const imageComparisonContainers = [].slice.call(this.comparsionsSliderContainer.querySelectorAll('.comparsions__slider-container'));
-        console.log(imageComparisonContainers);
         window.addEventListener('scroll', function () {
             if (!scrolling) {
                 scrolling = true;
@@ -26,7 +25,6 @@ export class ComparsionsSlider {
                     ? setTimeout(function () { checkLabel(imageComparisonContainers); }, 100)
                     : requestAnimationFrame(function () { checkLabel(imageComparisonContainers); });
             }
-            console.log('resizing');
         }, false);
         function checkPosition(container) {
             container.forEach(function (actualContainer) {
@@ -39,8 +37,6 @@ export class ComparsionsSlider {
         }
         function checkLabel(containers) {
             containers.forEach(function (container) {
-                console.log('container');
-                console.log(container);
                 const actual = container;
                 updateLabel(actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'), actual.querySelector('.comparsions__slider-resize-img'), 'left');
                 updateLabel(actual.querySelector('.comparsions__slider-image-label[data-type="original"]'), actual.querySelector('.comparsions__slider-resize-img'), 'right');
@@ -53,7 +49,6 @@ export class ComparsionsSlider {
             const pan = new Hammer.Pan();
             handleHammer.add(pan);
             handleHammer.on('panstart', function (el) {
-                //console.log(el);
                 handle.classList.add('draggable');
                 handle.classList.add('draggable-' + index);
                 resizeElement.classList.add('resizable');
