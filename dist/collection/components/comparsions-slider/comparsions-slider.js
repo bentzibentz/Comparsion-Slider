@@ -14,7 +14,10 @@ export class ComparsionsSlider {
         });
         imageComparisonContainers.forEach(function (imageComparisonContainer) {
             const actual = imageComparisonContainer;
-            drags(actual.querySelector('.comparsions__slider-handle'), actual.querySelector('.comparsions__slider-resize-img'), actual, actual.querySelector('.comparsions__slider-image-label[data-type="original"]'), actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'));
+            const actualHandle = actual.querySelector('.comparsions__slider-handle');
+            const actualHandleId = actualHandle.getAttribute('data-handle-id');
+            actualHandle.setAttribute('id', 'comparsions__slider-handle-' + actualHandleId);
+            drags(actual.querySelector('.comparsions__slider-handle'), actual.querySelector('.comparsions__slider-resize-img'), actual, actual.querySelector('.comparsions__slider-image-label[data-type="original"]'), actual.querySelector('.comparsions__slider-image-label[data-type="modified"]'), actualHandleId);
         });
         window.addEventListener("resize", function () {
             if (!resizing) {
@@ -44,24 +47,26 @@ export class ComparsionsSlider {
             });
             resizing = false;
         }
-        function drags(dragElement, resizeElement, container, labelContainer, labelResizeElement) {
-            const handle = document.getElementById('comparsions__slider-handle');
+        function drags(dragElement, resizeElement, container, labelContainer, labelResizeElement, index) {
+            const handle = document.getElementById('comparsions__slider-handle-' + index);
             const handleHammer = new Hammer.Manager(handle);
             const pan = new Hammer.Pan();
             handleHammer.add(pan);
             handleHammer.on('panstart', function (el) {
                 //console.log(el);
-                dragElement.classList.add('draggable');
+                handle.classList.add('draggable');
+                handle.classList.add('draggable-' + index);
                 resizeElement.classList.add('resizable');
-                let dragElementOffsets = dragElement.getBoundingClientRect();
+                resizeElement.classList.add('resizable-' + index);
+                let dragElementOffsets = handle.getBoundingClientRect();
                 let containerOffsets = container.getBoundingClientRect();
-                let dragWidth = dragElement.clientWidth, xPosition = dragElementOffsets.left + document.body.scrollLeft + dragWidth - el.center.x, containerOffset = containerOffsets.left + document.body.scrollLeft, containerWidth = container.clientWidth, minLeft = containerOffset + 10, maxLeft = containerOffset + containerWidth - dragWidth - 10;
+                let dragWidth = handle.clientWidth, xPosition = dragElementOffsets.left + document.body.scrollLeft + dragWidth - el.center.x, containerOffset = containerOffsets.left + document.body.scrollLeft, containerWidth = container.clientWidth, minLeft = containerOffset + 10, maxLeft = containerOffset + containerWidth - dragWidth - 10;
                 handleHammer.on('panmove', function (el) {
                     if (!dragging) {
                         dragging = true;
                         (!window.requestAnimationFrame)
-                            ? setTimeout(function () { animateDraggedHandle(el.center.x, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement); }, 100)
-                            : requestAnimationFrame(function () { animateDraggedHandle(el.center.x, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement); });
+                            ? setTimeout(function () { animateDraggedHandle(el.center.x, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement, index); }, 100)
+                            : requestAnimationFrame(function () { animateDraggedHandle(el.center.x, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement, index); });
                     }
                 });
             });
@@ -70,7 +75,7 @@ export class ComparsionsSlider {
                 resizeElement.classList.remove('resizable');
             });
         }
-        function animateDraggedHandle(e, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement) {
+        function animateDraggedHandle(e, xPosition, dragWidth, minLeft, maxLeft, containerOffset, containerWidth, resizeElement, labelContainer, labelResizeElement, index) {
             let leftValue = e + xPosition - dragWidth;
             //constrain the draggable element to move inside his container
             if (leftValue < minLeft) {
@@ -80,13 +85,14 @@ export class ComparsionsSlider {
                 leftValue = maxLeft;
             }
             const widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + '%';
-            const draggables = document.getElementsByClassName('draggable');
-            const resizables = document.getElementsByClassName('resizable');
+            const draggables = document.getElementsByClassName('draggable-' + index);
+            const resizables = document.getElementsByClassName('resizable-' + index);
             draggables[0].style.left = widthValue;
             draggables[0].addEventListener("mouseup vmouseup", function () {
                 this.classList.remove('draggable');
+                this.classList.remove('draggable-' + index);
                 resizeElement.classList.remove('resizable');
-                console.log('mouseup');
+                resizeElement.classList.remove('resizable-' + index);
             });
             resizables[0].style.width = widthValue;
             updateLabel(labelResizeElement, resizeElement, 'left');
@@ -94,10 +100,6 @@ export class ComparsionsSlider {
             dragging = false;
         }
         function updateLabel(label, resizeElement, position) {
-            console.log('updateLabel');
-            console.log(label);
-            console.log(resizeElement);
-            console.log(position);
             if (position === 'left') {
                 (getOffsetLeft(label) + label.clientWidth < getOffsetLeft(resizeElement) + resizeElement.clientWidth) ? label.classList.remove('is-hidden') : label.classList.add('is-hidden');
             }
@@ -125,12 +127,12 @@ export class ComparsionsSlider {
                         h("div", { class: "comparsions__slider-resize-img" },
                             h("img", { src: this.before, alt: "Before Image" }),
                             h("span", { class: "comparsions__slider-image-label", "data-type": "modified" }, "Before")),
-                        h("span", { class: "comparsions__slider-handle", id: "comparsions__slider-handle" },
+                        h("span", { class: "comparsions__slider-handle", id: "comparsions__slider-handle", "data-handle-id": this.id },
                             h("svg", { version: "1.1", id: "Layer_1", xmlns: "http://www.w3.org/2000/svg", x: "0px", y: "0px", width: "32px", height: "32px", viewBox: "0 0 32 32", "enable-background": "new 0 0 32 32" },
                                 h("polygon", { fill: "#FFFFFF", points: "13,21 8,16 13,11 " }),
                                 h("polygon", { fill: "#FFFFFF", points: "19,11 24,16 19,21 " }))))))));
     }
     static get is() { return "comparsions-slider"; }
-    static get properties() { return { "after": { "type": String, "attr": "after" }, "before": { "type": String, "attr": "before" }, "comparsionsSliderContainer": { "elementRef": true } }; }
+    static get properties() { return { "after": { "type": String, "attr": "after" }, "before": { "type": String, "attr": "before" }, "comparsionsSliderContainer": { "elementRef": true }, "id": { "type": String, "attr": "id" } }; }
     static get style() { return "/**style-placeholder:comparsions-slider:**/"; }
 }

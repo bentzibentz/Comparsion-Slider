@@ -20,6 +20,10 @@
         {
           "name": "before",
           "type": "String"
+        },
+        {
+          "name": "id",
+          "type": "String"
         }
       ],
       "hostElement": {
